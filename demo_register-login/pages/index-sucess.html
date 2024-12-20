@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Bán Hàng</title>
+    <!-- Link Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .product-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .jumbotron {
+            background-color: #f8f9fa;
+            padding: 2rem 1rem;
+        }
+        footer {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Cửa Hàng Online</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="./index-trangchu.html">Trang Chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sản Phẩm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Liên Hệ</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Jumbotron -->
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Chào mừng bạn đến với cửa hàng!</h1>
+        <p class="lead">Chúng tôi cung cấp các sản phẩm tốt nhất với giá cả hợp lý.</p>
+        <a class="btn btn-primary btn-lg" href="#products" role="button">Xem Sản Phẩm</a>
+    </div>
+
+    <!-- Product Section -->
+    <div class="container" id="products">
+        <h2 class="text-center mb-4">Sản Phẩm Nổi Bật</h2>
+        <div class="row">
+            <!-- Product 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/10/15/963840/FRONT_2_3_2400X1500.jpg" class="card-img-top" alt="Product 1">
+                    <div class="card-body">
+                        <h5 class="card-title">SẢN PHẨM 1</h5>
+                        <p class="card-text">HONDA ALPHA WAVE - Lướt Êm Ái</p>
+                        <p class="text-danger font-weight-bold">25,000,000 VND</p>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#buyModal" data-product="SẢN PHẨM 1" data-price="25,000,000 VND">Mua ngay</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="https://denledxe.com/uploads/page/2020_12/Honda-AirBlade-150-2021.jpg" class="card-img-top" alt="Product 2">
+                    <div class="card-body">
+                        <h5 class="card-title">SẢN PHẨM 2</h5>
+                        <p class="card-text">HONDA AIR BLADE - Siêu Bứt Phá</p>
+                        <p class="text-danger font-weight-bold">40,000,000 VND</p>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#buyModal" data-product="SẢN PHẨM 2" data-price="40,000,000 VND">Mua ngay</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="https://giadinh.mediacdn.vn/296230595582509056/2023/2/24/bang-gia-xe-honda-vision-moi-nhat-thang-2-2023-tai-dai-ly-1676541768-1-1677211944292-16772119446001040135892.jpg" class="card-img-top" alt="Product 3">
+                    <div class="card-body">
+                        <h5 class="card-title">SẢN PHẨM 3</h5>
+                        <p class="card-text">HONDA VISION - Phiên Bản Giới Hạn</p>
+                        <p class="text-danger font-weight-bold">30,000,000 VND</p>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#buyModal" data-product="SẢN PHẨM 3" data-price="30,000,000 VND">Mua ngay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="buyModalLabel">Thông Tin Mua Hàng</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Sản Phẩm:</strong> <span id="modalProduct"></span></p>
+                    <p><strong>Giá:</strong> <span id="modalPrice"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="confirmPurchase">Xác Nhận Mua</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        <p class="mb-0">&copy; 2024 Cửa Hàng Online. Mọi quyền được bảo lưu.</p>
+    </footer>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#buyModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget); // Button that triggered the modal
+                var product = button.data('product'); // Extract info from data-* attributes
+                var price = button.data('price');
+                
+                // Update the modal's content.
+                var modal = $(this);
+                modal.find('#modalProduct').text(product);
+                modal.find('#modalPrice').text(price);
+            });
+
+            $('#confirmPurchase').on('click', function() {
+                alert('Đặt hàng thành công! Cảm ơn bạn đã mua sản phẩm của chúng tôi.');
+                $('#buyModal').modal('hide');
+            });
+        });
+    </script>
+    <script>
+            $('#confirmPurchase').on('click', function() {
+        const product = $('#modalProduct').text();
+        const price = $('#modalPrice').text();
+
+        // Lưu thông tin sản phẩm vào localStorage
+        const buyers = JSON.parse(localStorage.getItem('buyers')) || [];
+        buyers.push({ product, price });
+        localStorage.setItem('buyers', JSON.stringify(buyers));
+
+        // Chuyển hướng tới trang danh sách người mua
+        window.location.href = 'index-sucess.html';
+});
+
+    </script>
+</body>
+</html>

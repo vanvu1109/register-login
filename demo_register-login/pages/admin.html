@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản trị viên</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        .container {
+            margin: 20px auto;
+            max-width: 600px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .form-control {
+            margin-bottom: 15px;
+        }
+
+        .form-control label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-control input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .actions button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .actions .add-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .actions .edit-btn {
+            background-color: #FFC107;
+            color: white;
+        }
+
+        .actions .delete-btn {
+            background-color: #F44336;
+            color: white;
+        }
+
+        .user-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .user-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .user-list li:last-child {
+            border-bottom: none;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bảng Điều Khiển Quản Trị</h1>
+    </header>
+
+    <div class="container">
+        <h2>Quản lý người dùng</h2>
+
+        <!-- Form thêm người dùng -->
+        <div class="form-control">
+            <label for="emailInput">Email:</label>
+            <input type="email" id="emailInput" placeholder="Nhập email người dùng">
+        </div>
+        <div class="actions">
+            <button class="add-btn" id="addUser">Thêm người dùng</button>
+        </div>
+
+        <!-- Danh sách người dùng -->
+        <ul class="user-list" id="123">
+            <!-- Danh sách người dùng sẽ được thêm vào đây -->
+        </ul>
+    </div>
+
+    <footer>
+        &copy; 2024 Bảng Điều Khiển Quản Trị. Mọi quyền được bảo lưu.
+    </footer>
+
+    <script>
+        // Lấy danh sách người dùng từ localStorage
+        let userLocal = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Truy cập vào DOM phần tử <ul> có id là "123"
+        const userListDom = document.getElementById("123");
+        const emailInput = document.getElementById("emailInput");
+
+        // Hàm hiển thị danh sách người dùng
+        function renderUserList() {
+            userListDom.innerHTML = ""; // Xóa nội dung cũ
+            userLocal.forEach((user, index) => {
+                const li = document.createElement("li"); // Tạo phần tử <li>
+                li.innerHTML = `
+                    ${user.email}
+                    <div class="actions">
+                        <button class="edit-btn" onclick="editUser(${index})">Sửa</button>
+                        <button class="delete-btn" onclick="deleteUser(${index})">Xóa</button>
+                    </div>
+                `;
+                userListDom.appendChild(li); // Thêm <li> vào <ul>
+            });
+        }
+
+        // Hàm thêm người dùng
+        document.getElementById("addUser").addEventListener("click", () => {
+            const email = emailInput.value.trim();
+            if (email) {
+                userLocal.push({ email });
+                localStorage.setItem("users", JSON.stringify(userLocal));
+                emailInput.value = ""; // Xóa giá trị trong ô input
+                renderUserList(); // Cập nhật danh sách
+            } else {
+                alert("Vui lòng nhập email!");
+            }
+        });
+
+        // Hàm xóa người dùng
+        function deleteUser(index) {
+            userLocal.splice(index, 1);
+            localStorage.setItem("users", JSON.stringify(userLocal));
+            renderUserList(); // Cập nhật danh sách
+        }
+
+        // Hàm sửa người dùng
+        function editUser(index) {
+            const newEmail = prompt("Nhập email mới:", userLocal[index].email);
+            if (newEmail) {
+                userLocal[index].email = newEmail.trim();
+                localStorage.setItem("users", JSON.stringify(userLocal));
+                renderUserList(); // Cập nhật danh sách
+            }
+        }
+
+        // Hiển thị danh sách người dùng khi tải trang
+        renderUserList();
+    </script>
+</body>
+</html>
